@@ -20,6 +20,7 @@ URL:		http://www.cgsecurity.org/wiki/TestDisk
 BuildRequires:	ncurses-devel >= 5.2
 BuildRequires:  e2fsprogs-devel >= %ver_e2fsprogs
 BuildRequires:  libntfs-devel >= %ver_ntfsprogs
+BuildRequires:	jpeg-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 
@@ -105,12 +106,11 @@ systèmes de fichiers suivants :
 %build
 (
 cd progsreiserfs-%ver_progsreiserfs
-%configure
-sed -i s/-Werror// libreiserfs/Makefile
-make
+%configure2_5x --disable-Werror
+%make
 )
 
-%configure --with-reiserfs-lib=`pwd`/progsreiserfs-%ver_progsreiserfs/libreiserfs/.libs/ --with-reiserfs-includes=`pwd`/progsreiserfs-%ver_progsreiserfs/include/
+%configure2_5x --with-reiserfs-lib=`pwd`/progsreiserfs-%ver_progsreiserfs/libreiserfs/.libs/ --with-reiserfs-includes=`pwd`/progsreiserfs-%ver_progsreiserfs/include/
 %make
 
 %install
@@ -130,4 +130,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog INFO INSTALL NEWS README THANKS doc/*.html doc/*.gif
 %attr(755,root,root) %{_sbindir}/*
-%{_mandir}/man1/*.1.bz2
+%{_mandir}/man1/*
