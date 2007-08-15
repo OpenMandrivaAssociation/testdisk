@@ -1,6 +1,6 @@
 %define name    testdisk
 %define version 6.8
-%define rel     %mkrel 1
+%define rel     %mkrel 2
 %define ver_e2fsprogs 1.35
 %define ver_progsreiserfs 0.3.1-rc8
 %define ver_ntfsprogs 1.9.4
@@ -23,6 +23,9 @@ BuildRequires:  libntfs-devel >= %ver_ntfsprogs
 BuildRequires:	jpeg-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
+%package -n photorec
+Summary:	Data recovery software
+Group:		System/Kernel and hardware
 
 %description
 Tool to check and undelete partition. Works with the following
@@ -98,6 +101,15 @@ systèmes de fichiers suivants :
     * UFS et UFS2 (Sun/BSD/...)
     * XFS, Système de fichier journalisé de SGI 
 
+%description -n photorec
+PhotoRec is file data recovery software designed to recover lost files
+including video, documents and archives from Hard Disks and CDRom and lost
+pictures (thus, its 'Photo Recovery' name) from digital camera memory.
+
+PhotoRec ignores the filesystem and goes after the underlying data, so it
+will still work even if your media's filesystem has been severely damaged
+or re-formatted.
+
 %prep
 %setup -q -n %{name}-%{version}
 %setup -q -a 1 -D -n %{name}-%{version}
@@ -117,9 +129,6 @@ cd progsreiserfs-%ver_progsreiserfs
 rm -rf $RPM_BUILD_ROOT
 
 %make DESTDIR=$RPM_BUILD_ROOT install
-#install -d $RPM_BUILD_ROOT%{_sbindir}
-
-#install src/testdisk	$RPM_BUILD_ROOT%{_sbindir}/
 
 rm -rf $RPM_BUILD_ROOT/%_docdir
 
@@ -129,5 +138,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog INFO INSTALL NEWS README THANKS doc/*.html doc/*.gif
-%attr(755,root,root) %{_sbindir}/*
-%{_mandir}/man1/*
+%attr(755,root,root) %{_sbindir}/testdisk
+%{_mandir}/man1/testdisk*
+
+%files -n photorec
+%defattr(644,root,root,755)
+%doc AUTHORS ChangeLog INFO INSTALL NEWS README THANKS doc/*photorec*.html doc/*.gif
+%attr(755,root,root) %{_sbindir}/photorec
+%{_mandir}/man1/photorec*
