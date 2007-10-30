@@ -1,9 +1,9 @@
 %define name    testdisk
-%define version 6.8
-%define rel     %mkrel 3
+%define version 6.9
+%define rel     %mkrel 1
 %define ver_e2fsprogs 1.35
 %define ver_progsreiserfs 0.3.1-rc8
-%define ver_ntfsprogs 1.9.4
+%define ver_ntfsprogs 2.0.0
 
 Summary:	Tool to check and undelete partition
 Summary(pl):	Narzêdzie sprawdzaj±ce i odzyskuj±ce partycje
@@ -11,9 +11,9 @@ Summary(fr):	Outil pour vérifier et restaurer des partitions
 Name:		%name
 Version:	%version
 Release:	%rel
-License:	GPL
+License:	GPLv2+
 Group:		System/Kernel and hardware
-Source0:	http://www.cgsecurity.org/%{name}-%{version}.tar.bz2
+Source0:	http://www.cgsecurity.org/%{name}-%{version}-WIP.tar.bz2
 Source1:	progsreiserfs-%ver_progsreiserfs.tar.bz2
 Patch0:		progsreiserfs-journal.patch
 URL:		http://www.cgsecurity.org/wiki/TestDisk
@@ -111,8 +111,8 @@ will still work even if your media's filesystem has been severely damaged
 or re-formatted.
 
 %prep
-%setup -q -n %{name}-%{version}
-%setup -q -a 1 -D -n %{name}-%{version}
+%setup -q -n %{name}-%{version}-WIP
+%setup -q -a 1 -D -n %{name}-%{version}-WIP
 %patch0
 
 %build
