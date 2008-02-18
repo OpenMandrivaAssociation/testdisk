@@ -1,6 +1,6 @@
 %define name    testdisk
 %define version 6.9
-%define rel     %mkrel 1
+%define rel     %mkrel 2
 %define ver_e2fsprogs 1.35
 %define ver_progsreiserfs 0.3.1-rc8
 %define ver_ntfsprogs 2.0.0
@@ -13,7 +13,7 @@ Version:	%version
 Release:	%rel
 License:	GPLv2+
 Group:		System/Kernel and hardware
-Source0:	http://www.cgsecurity.org/%{name}-%{version}-WIP.tar.bz2
+Source0:	http://www.cgsecurity.org/%{name}-%{version}.tar.bz2
 Source1:	progsreiserfs-%ver_progsreiserfs.tar.bz2
 Patch0:		progsreiserfs-journal.patch
 URL:		http://www.cgsecurity.org/wiki/TestDisk
@@ -111,8 +111,8 @@ will still work even if your media's filesystem has been severely damaged
 or re-formatted.
 
 %prep
-%setup -q -n %{name}-%{version}-WIP
-%setup -q -a 1 -D -n %{name}-%{version}-WIP
+%setup -q -n %{name}-%{version}
+%setup -q -a 1 -D -n %{name}-%{version}
 %patch0
 
 %build
@@ -128,7 +128,7 @@ cd progsreiserfs-%ver_progsreiserfs
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%make DESTDIR=$RPM_BUILD_ROOT install
+%makeinstall_std 
 
 rm -rf $RPM_BUILD_ROOT/%_docdir
 
