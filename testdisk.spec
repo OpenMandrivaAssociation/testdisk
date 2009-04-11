@@ -16,6 +16,7 @@ Group:		System/Kernel and hardware
 Source0:	http://www.cgsecurity.org/%{name}-%{version}.tar.bz2
 Source1:	progsreiserfs-%ver_progsreiserfs.tar.bz2
 Patch0:		progsreiserfs-journal.patch
+Patch1:		testdisk-6.10-fix-str-fmt.patch
 URL:		http://www.cgsecurity.org/wiki/TestDisk
 BuildRequires:	ncurses-devel >= 5.2
 BuildRequires:  e2fsprogs-devel >= %ver_e2fsprogs
@@ -111,9 +112,9 @@ will still work even if your media's filesystem has been severely damaged
 or re-formatted.
 
 %prep
-%setup -q -n %{name}-%{version}
 %setup -q -a 1 -D -n %{name}-%{version}
 %patch0
+%patch1 -p0
 
 %build
 (
