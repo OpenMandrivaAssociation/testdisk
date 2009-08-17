@@ -23,6 +23,7 @@ BuildRequires:	ncurses-devel >= 5.2
 BuildRequires:  e2fsprogs-devel >= %ver_e2fsprogs
 BuildRequires:  libntfs-devel >= %ver_ntfsprogs
 BuildRequires:	jpeg-devel
+BuildRequires:	libuuid-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %package -n photorec
