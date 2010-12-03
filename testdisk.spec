@@ -1,6 +1,6 @@
 %define name    testdisk
 %define version 6.11
-%define rel     %mkrel 3
+%define rel     %mkrel 4
 %define ver_e2fsprogs 1.35
 %define ver_progsreiserfs 0.3.1-rc8
 %define ver_ntfsprogs 2.0.0
