@@ -1,6 +1,6 @@
 %define name    testdisk
-%define version 6.11
-%define rel     %mkrel 5
+%define version 6.13
+%define rel     %mkrel 1
 %define ver_e2fsprogs 1.35
 %define ver_progsreiserfs 0.3.1-rc8
 %define ver_ntfsprogs 2.0.0
@@ -29,6 +29,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 %package -n photorec
 Summary:	Data recovery software
 Group:		System/Kernel and hardware
+Requires:	%{name} = %{version}
 
 %description
 Tool to check and undelete partition. Works with the following
@@ -113,10 +114,21 @@ PhotoRec ignores the filesystem and goes after the underlying data, so it
 will still work even if your media's filesystem has been severely damaged
 or re-formatted.
 
+
+%package -n 	fidentify
+Summary:	Data recovery software
+Group:		System/Kernel and hardware
+Requires:	%{name} = %{version}
+
+%description -n fidentify
+Recover lost files from harddisk, digital camera and cdrom
+fidentify the file type, the "extension", by using thr same database than PhotoRec.
+
+
 %prep
 %setup -q -a 1 -D -n %{name}-%{version}
 %patch0
-%patch1 -p1 -b .exiv2
+#%patch1 -p1 -b .exiv2
 
 %build
 (
@@ -140,12 +152,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog INFO INSTALL NEWS README THANKS doc/*.html doc/*.gif
-%attr(755,root,root) %{_sbindir}/testdisk
-%{_mandir}/man1/testdisk*
+%doc AUTHORS COPYING ChangeLog INFO INSTALL NEWS README THANKS doc/*.html
+%attr(755,root,root) %{_bindir}/testdisk
+%{_mandir}/man8/testdisk*
 
 %files -n photorec
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog INFO INSTALL NEWS README THANKS doc/*photorec*.html doc/*.gif
-%attr(755,root,root) %{_sbindir}/photorec
-%{_mandir}/man1/photorec*
+%doc AUTHORS ChangeLog INFO INSTALL NEWS README THANKS
+%attr(755,root,root) %{_bindir}/photorec
+%{_mandir}/man8/photorec*
+
+
+%files -n fidentify
+%defattr(644,root,root,755)
+%doc AUTHORS ChangeLog INFO INSTALL NEWS README THANKS
+%attr(755,root,root) %{_bindir}/fidentify
+%{_mandir}/man8/fidentify*
+
