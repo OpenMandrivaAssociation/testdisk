@@ -141,14 +141,14 @@ cd progsreiserfs-%ver_progsreiserfs
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %makeinstall_std 
 
-rm -rf $RPM_BUILD_ROOT/%_docdir
+rm -rf %{buildroot}/%_docdir
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(644,root,root,755)
