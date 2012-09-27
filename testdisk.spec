@@ -65,7 +65,7 @@ Requires:	%{name} = %{version}
 
 %description -n	fidentify
 Recover lost files from harddisk, digital camera and cdrom
-fidentify the file type, the "extension", by using thr same database than PhotoRec.
+fidentify the file type, the "extension", by using the same database than PhotoRec.
 
 
 %prep
