@@ -1,5 +1,7 @@
 %define ver_progsreiserfs 0.3.1-rc8
 
+%bcond_without	uclibc
+
 Summary:	Tool to check and undelete partition
 Name:		testdisk
 Version:	6.13
@@ -15,13 +17,11 @@ URL:		http://www.cgsecurity.org/wiki/TestDisk
 BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	pkgconfig(ext2fs)
 BuildRequires:  pkgconfig(libntfs-3g) 
-BuildRequires:	devel(libjpeg(64bit))
+BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(uuid)
-
-%package -n	photorec
-Summary:	Data recovery software
-Group:		System/Kernel and hardware
-Requires:	%{name} = %{version}
+%if %{with uclibc}
+BuildRequires:	uClibc-devel >= 0.9.33.2-9
+%endif
 
 %description
 Tool to check and undelete partition. Works with the following
@@ -48,6 +48,40 @@ filesystems:
     * Unix File System UFS and UFS2 (Sun/BSD/...)
     * XFS, SGI's Journaled File System 
 
+%package -n	uclibc-%{name}
+Summary:	Tool to check and undelete partition (uClibc build)
+Group:		System/Kernel and hardware
+
+%description -n	uclibc-%{name}
+Tool to check and undelete partition. Works with the following
+filesystems:
+    * BeFS ( BeOS )
+    * BSD disklabel ( FreeBSD/OpenBSD/NetBSD )
+    * CramFS, Compressed File System
+    * DOS/Windows FAT12, FAT16 and FAT32
+    * HFS and HFS+, Hierarchical File System
+    * JFS, IBM's Journaled File System
+    * Linux Ext2 and Ext3
+    * Linux Raid
+          o RAID 1: mirroring
+          o RAID 4: striped array with parity device
+          o RAID 5: striped array with distributed parity information
+          o RAID 6: striped array with distributed dual redundancy information 
+    * Linux Swap (versions 1 and 2)
+    * LVM and LVM2, Linux Logical Volume Manager
+    * Mac partition map
+    * Novell Storage Services NSS
+    * NTFS ( Windows NT/2K/XP/2003/Vista )
+    * ReiserFS 3.5, 3.6 and 4
+    * Sun Solaris i386 disklabel
+    * Unix File System UFS and UFS2 (Sun/BSD/...)
+    * XFS, SGI's Journaled File System 
+
+%package -n	photorec
+Summary:	Data recovery software
+Group:		System/Kernel and hardware
+Requires:	%{name} = %{version}
+
 %description -n	photorec
 PhotoRec is file data recovery software designed to recover lost files
 including video, documents and archives from Hard Disks and CDRom and lost
@@ -57,6 +91,24 @@ PhotoRec ignores the filesystem and goes after the underlying data, so it
 will still work even if your media's filesystem has been severely damaged
 or re-formatted.
 
+%package -n	uclibc-photorec
+Summary:	Data recovery software (uClibc build)
+Group:		System/Kernel and hardware
+Requires:	uclibc-%{name} = %{version}
+
+%description -n	uclibc-photorec
+PhotoRec is file data recovery software designed to recover lost files
+including video, documents and archives from Hard Disks and CDRom and lost
+pictures (thus, its 'Photo Recovery' name) from digital camera memory.
+
+PhotoRec ignores the filesystem and goes after the underlying data, so it
+will still work even if your media's filesystem has been severely damaged
+or re-formatted.
+
+%package -n	uclibc-photorec
+Summary:	Data recovery software (uClibc build)
+Group:		System/Kernel and hardware
+Requires:	uclibc-%{name} = %{version}
 
 %package -n	fidentify
 Summary:	Data recovery software
@@ -67,25 +119,64 @@ Requires:	%{name} = %{version}
 Recover lost files from harddisk, digital camera and cdrom
 fidentify the file type, the "extension", by using the same database than PhotoRec.
 
+%package -n	uclibc-fidentify
+Summary:	Data recovery software (uClibc build)
+Group:		System/Kernel and hardware
+Requires:	%{name} = %{version}
+
+%description -n	uclibc-fidentify
+Recover lost files from harddisk, digital camera and cdrom
+fidentify the file type, the "extension", by using the same database than PhotoRec.
 
 %prep
-%setup -q -a 1 -D -n %{name}-%{version}
+%setup -q -a 1
 %patch0
 #%patch1 -p1 -b .exiv2
 
 %build
-pushd progsreiserfs-%{ver_progsreiserfs}
+TOP_DIR="$PWD"
+CONFIGURE_TOP=..
+%if %{with uclibc}
+mkdir -p progsreiserfs-%{ver_progsreiserfs}/uclibc
+pushd progsreiserfs-%{ver_progsreiserfs}/uclibc
+%uclibc_configure \
+		--enable-shared=no \
+		--enable-static=yes \
+		--disable-Werror
+%make
+popd
+
+mkdir -p uclibc
+pushd uclibc
+%uclibc_configure \
+		--with-reiserfs-lib=${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/uclibc/libreiserfs/.libs/ \
+		--with-reiserfs-includes=${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/include/
+%make
+popd
+%endif
+
+mkdir -p progsreiserfs-%{ver_progsreiserfs}/system
+pushd progsreiserfs-%{ver_progsreiserfs}/system
 %configure2_5x --disable-Werror
 %make
 popd
 
-%configure2_5x --with-reiserfs-lib=`pwd`/progsreiserfs-%ver_progsreiserfs/libreiserfs/.libs/ --with-reiserfs-includes=`pwd`/progsreiserfs-%ver_progsreiserfs/include/
+mkdir -p system
+pushd system
+%configure2_5x	--with-reiserfs-lib=${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/system/libreiserfs/.libs/ \
+		--with-reiserfs-includes=${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/include/ \
+		--enable-shared=no \
+		--enable-static=yes
 %make
+popd
 
 %install
-%makeinstall_std 
+%if %{with uclibc}
+%makeinstall_std -C uclibc
+%endif
 
-rm -rf %{buildroot}/%_docdir
+%makeinstall_std -C system
+rm -rf %{buildroot}%{_docdir}
 
 %files
 %defattr(644,root,root,755)
@@ -101,3 +192,11 @@ rm -rf %{buildroot}/%_docdir
 %attr(755,root,root) %{_bindir}/fidentify
 %{_mandir}/man8/fidentify*
 
+%files -n uclibc-%{name}
+%attr(755,root,root) %{uclibc_root}%{_bindir}/testdisk
+
+%files -n uclibc-photorec
+%attr(755,root,root) %{uclibc_root}%{_bindir}/photorec
+
+%files -n uclibc-fidentify
+%attr(755,root,root) %{uclibc_root}%{_bindir}/fidentify
