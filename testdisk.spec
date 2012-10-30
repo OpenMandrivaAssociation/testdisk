@@ -180,7 +180,7 @@ rm -rf %{buildroot}%{_docdir}
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog INFO INSTALL NEWS README THANKS doc/*.html
+%doc AUTHORS ChangeLog INFO NEWS README THANKS doc/*.html
 %attr(755,root,root) %{_bindir}/testdisk
 %{_mandir}/man8/testdisk*
 
