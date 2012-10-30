@@ -105,11 +105,6 @@ PhotoRec ignores the filesystem and goes after the underlying data, so it
 will still work even if your media's filesystem has been severely damaged
 or re-formatted.
 
-%package -n	uclibc-photorec
-Summary:	Data recovery software (uClibc build)
-Group:		System/Kernel and hardware
-Requires:	uclibc-%{name} = %{version}
-
 %package -n	fidentify
 Summary:	Data recovery software
 Group:		System/Kernel and hardware
