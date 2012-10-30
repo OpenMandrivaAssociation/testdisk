@@ -34,10 +34,10 @@ filesystems:
     * JFS, IBM's Journaled File System
     * Linux Ext2 and Ext3
     * Linux Raid
-          o RAID 1: mirroring
-          o RAID 4: striped array with parity device
-          o RAID 5: striped array with distributed parity information
-          o RAID 6: striped array with distributed dual redundancy information 
+	o RAID 1: mirroring
+	o RAID 4: striped array with parity device
+	o RAID 5: striped array with distributed parity information
+	o RAID 6: striped array with distributed dual redundancy information 
     * Linux Swap (versions 1 and 2)
     * LVM and LVM2, Linux Logical Volume Manager
     * Mac partition map
@@ -63,10 +63,10 @@ filesystems:
     * JFS, IBM's Journaled File System
     * Linux Ext2 and Ext3
     * Linux Raid
-          o RAID 1: mirroring
-          o RAID 4: striped array with parity device
-          o RAID 5: striped array with distributed parity information
-          o RAID 6: striped array with distributed dual redundancy information 
+	o RAID 1: mirroring
+	o RAID 4: striped array with parity device
+	o RAID 5: striped array with distributed parity information
+	o RAID 6: striped array with distributed dual redundancy information 
     * Linux Swap (versions 1 and 2)
     * LVM and LVM2, Linux Logical Volume Manager
     * Mac partition map
