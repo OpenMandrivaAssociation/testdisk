@@ -191,6 +191,7 @@ rm -rf %{buildroot}%{_docdir}
 %{_bindir}/fidentify
 %{_mandir}/man8/fidentify*
 
+%if %{with uclibc}
 %files -n uclibc-%{name}
 %{uclibc_root}%{_bindir}/testdisk
 
@@ -199,3 +200,4 @@ rm -rf %{buildroot}%{_docdir}
 
 %files -n uclibc-fidentify
 %{uclibc_root}%{_bindir}/fidentify
+%endif
