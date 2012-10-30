@@ -16,7 +16,7 @@ Patch1:		photorec_611_exif_bound_checking_v2.patch
 URL:		http://www.cgsecurity.org/wiki/TestDisk
 BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	pkgconfig(ext2fs)
-BuildRequires:  pkgconfig(libntfs-3g) 
+BuildRequires:	pkgconfig(libntfs-3g) 
 BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(uuid)
 %if %{with uclibc}
@@ -179,24 +179,23 @@ popd
 rm -rf %{buildroot}%{_docdir}
 
 %files
-%defattr(644,root,root,755)
 %doc AUTHORS ChangeLog INFO NEWS README THANKS doc/*.html
 %attr(755,root,root) %{_bindir}/testdisk
 %{_mandir}/man8/testdisk*
 
 %files -n photorec
-%attr(755,root,root) %{_bindir}/photorec
+%{_bindir}/photorec
 %{_mandir}/man8/photorec*
 
 %files -n fidentify
-%attr(755,root,root) %{_bindir}/fidentify
+%{_bindir}/fidentify
 %{_mandir}/man8/fidentify*
 
 %files -n uclibc-%{name}
-%attr(755,root,root) %{uclibc_root}%{_bindir}/testdisk
+%{uclibc_root}%{_bindir}/testdisk
 
 %files -n uclibc-photorec
-%attr(755,root,root) %{uclibc_root}%{_bindir}/photorec
+%{uclibc_root}%{_bindir}/photorec
 
 %files -n uclibc-fidentify
-%attr(755,root,root) %{uclibc_root}%{_bindir}/fidentify
+%{uclibc_root}%{_bindir}/fidentify
