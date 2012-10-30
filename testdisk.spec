@@ -116,8 +116,8 @@ Group:		System/Kernel and hardware
 Requires:	%{name} = %{version}
 
 %description -n	fidentify
-Recover lost files from harddisk, digital camera and cdrom
-fidentify the file type, the "extension", by using the same database than PhotoRec.
+Recover lost files from harddisk, digital camera and cdrom fidentify the file
+type, the "extension", by using the same database than PhotoRec.
 
 %package -n	uclibc-fidentify
 Summary:	Data recovery software (uClibc build)
@@ -125,8 +125,8 @@ Group:		System/Kernel and hardware
 Requires:	%{name} = %{version}
 
 %description -n	uclibc-fidentify
-Recover lost files from harddisk, digital camera and cdrom
-fidentify the file type, the "extension", by using the same database than PhotoRec.
+Recover lost files from harddisk, digital camera and cdrom fidentify the file
+type, the "extension", by using the same database than PhotoRec.
 
 %prep
 %setup -q -a 1
