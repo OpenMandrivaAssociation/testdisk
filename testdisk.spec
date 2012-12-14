@@ -5,7 +5,7 @@
 Summary:	Tool to check and undelete partition
 Name:		testdisk
 Version:	6.13
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		System/Kernel and hardware
 Source0:	http://www.cgsecurity.org/%{name}-%{version}.tar.bz2
@@ -171,11 +171,10 @@ popd
 %endif
 
 %makeinstall_std -C system
-rm -rf %{buildroot}%{_docdir}
 
 %files
 %doc AUTHORS ChangeLog INFO NEWS README THANKS doc/*.html
-%attr(755,root,root) %{_bindir}/testdisk
+%{_bindir}/testdisk
 %{_mandir}/man8/testdisk*
 
 %files -n photorec
