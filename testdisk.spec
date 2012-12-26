@@ -5,7 +5,7 @@
 Summary:	Tool to check and undelete partition
 Name:		testdisk
 Version:	6.13
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		System/Kernel and hardware
 Source0:	http://www.cgsecurity.org/%{name}-%{version}.tar.bz2
@@ -144,8 +144,9 @@ popd
 mkdir -p uclibc
 pushd uclibc
 %uclibc_configure \
-		--with-reiserfs-lib=${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/uclibc/libreiserfs/.libs/ \
-		--with-reiserfs-includes=${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/include/
+		--with-dal-lib="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/uclibc/libdal/.libs/" \
+		--with-reiserfs-lib="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/uclibc/libreiserfs/.libs/" \
+		--with-reiserfs-includes="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/include/"
 %make
 popd
 %endif
@@ -158,8 +159,9 @@ popd
 
 mkdir -p system
 pushd system
-%configure2_5x	--with-reiserfs-lib=${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/system/libreiserfs/.libs/ \
-		--with-reiserfs-includes=${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/include/ \
+%configure2_5x	--with-dal-lib="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/system/libdal/.libs/" \
+		--with-reiserfs-lib="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/system/libreiserfs/.libs/" \
+		--with-reiserfs-includes="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/include/" \
 		--enable-shared=no \
 		--enable-static=yes
 %make
