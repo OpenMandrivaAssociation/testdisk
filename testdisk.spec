@@ -172,6 +172,8 @@ popd
 
 %makeinstall_std -C system
 
+rm -r %{buildroot}%{_docdir}/%{name}-%{version}
+
 %files
 %doc AUTHORS ChangeLog INFO NEWS README THANKS doc/*.html
 %{_bindir}/testdisk
