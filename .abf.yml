@@ -1,3 +1,5 @@
+removed_sources:
+  testdisk-6.13.tar.bz2: b08ace0257e3e437b6fc140360d75807ca4d46ae
 sources:
   progsreiserfs-0.3.1-rc8.tar.bz2: 24d3863d3b80a2b08da56bbf07df7f0ae327d7a8
-  testdisk-6.13.tar.bz2: b08ace0257e3e437b6fc140360d75807ca4d46ae
+  testdisk-6.14.tar.bz2: a2359406db5e3e3f9db81d8e8fce2a125dcc3677

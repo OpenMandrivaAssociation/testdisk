@@ -4,7 +4,7 @@
 
 Summary:	Tool to check and undelete partition
 Name:		testdisk
-Version:	6.13
+Version:	6.14
 Release:	4
 License:	GPLv2+
 Group:		System/Kernel and hardware
@@ -177,7 +177,8 @@ popd
 rm -r %{buildroot}%{_docdir}/%{name}-%{version}
 
 %files
-%doc AUTHORS ChangeLog INFO NEWS README THANKS doc/*.html
+%doc AUTHORS ChangeLog INFO NEWS README THANKS
+# doc/*.html
 %{_bindir}/testdisk
 %{_mandir}/man8/testdisk*
 
