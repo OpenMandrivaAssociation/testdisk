@@ -128,6 +128,18 @@ type, the "extension", by using the same database than PhotoRec.
 %patch0
 #%patch1 -p1 -b .exiv2
 
+libtoolize --force
+aclocal
+automake -a
+autoconf
+
+cd progsreiserfs-%{ver_progsreiserfs}
+libtoolize --force
+touch config.rpath
+aclocal -I m4
+automake -a
+autoconf
+
 %build
 TOP_DIR="$PWD"
 CONFIGURE_TOP=..
