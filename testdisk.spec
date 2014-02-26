@@ -5,7 +5,7 @@
 Summary:	Tool to check and undelete partition
 Name:		testdisk
 Version:	6.14
-Release:	8
+Release:	9
 License:	GPLv2+
 Group:		System/Kernel and hardware
 Source0:	http://www.cgsecurity.org/%{name}-%{version}.tar.bz2
@@ -19,6 +19,7 @@ BuildRequires:	pkgconfig(ext2fs)
 BuildRequires:	pkgconfig(libntfs-3g) 
 BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(uuid)
+BuildRequires:	gettext-devel
 %if %{with uclibc}
 BuildRequires:	uClibc-devel >= 0.9.33.2-9
 %endif
