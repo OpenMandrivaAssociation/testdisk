@@ -166,7 +166,9 @@ popd
 
 mkdir -p progsreiserfs-%{ver_progsreiserfs}/system
 pushd progsreiserfs-%{ver_progsreiserfs}/system
-%configure2_5x --disable-Werror
+%configure2_5x	--enable-shared=no \
+		--enable-static=yes \
+		--disable-Werror 
 %make
 popd
 
