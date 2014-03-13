@@ -5,7 +5,7 @@
 Summary:	Tool to check and undelete partition
 Name:		testdisk
 Version:	6.14
-Release:	9
+Release:	10
 License:	GPLv2+
 Group:		System/Kernel and hardware
 Source0:	http://www.cgsecurity.org/%{name}-%{version}.tar.bz2
@@ -14,6 +14,7 @@ Patch0:		progsreiserfs-journal.patch
 # Upstream patch
 Patch1:		photorec_611_exif_bound_checking_v2.patch
 URL:		http://www.cgsecurity.org/wiki/TestDisk
+BuildRequires:	pkgconfig(libewf)
 BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	pkgconfig(ext2fs)
 BuildRequires:	pkgconfig(libntfs-3g) 
@@ -159,7 +160,8 @@ pushd uclibc
 %uclibc_configure \
 		--with-dal-lib="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/uclibc/libdal/.libs/" \
 		--with-reiserfs-lib="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/uclibc/libreiserfs/.libs/" \
-		--with-reiserfs-includes="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/include/"
+		--with-reiserfs-includes="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/include/" \
+		--without-ewf
 %make
 popd
 %endif
