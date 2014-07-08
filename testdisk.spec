@@ -129,6 +129,7 @@ type, the "extension", by using the same database than PhotoRec.
 %setup -q -a 1
 %patch0
 #%patch1 -p1 -b .exiv2
+%before_configure
 
 libtoolize --force
 aclocal
