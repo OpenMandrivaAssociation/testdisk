@@ -5,7 +5,7 @@
 Summary:	Tool to check and undelete partition
 Name:		testdisk
 Version:	6.14
-Release:	14
+Release:	15
 License:	GPLv2+
 Group:		System/Kernel and hardware
 Source0:	http://www.cgsecurity.org/%{name}-%{version}.tar.bz2
@@ -169,7 +169,7 @@ popd
 
 mkdir -p progsreiserfs-%{ver_progsreiserfs}/system
 pushd progsreiserfs-%{ver_progsreiserfs}/system
-%configure2_5x	--enable-shared=no \
+%configure	--enable-shared=no \
 		--enable-static=yes \
 		--disable-Werror 
 %make
@@ -177,7 +177,7 @@ popd
 
 mkdir -p system
 pushd system
-%configure2_5x	--with-dal-lib="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/system/libdal/.libs/" \
+%configure	--with-dal-lib="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/system/libdal/.libs/" \
 		--with-reiserfs-lib="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/system/libreiserfs/.libs/" \
 		--with-reiserfs-includes="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/include/" \
 		--enable-shared=no \
