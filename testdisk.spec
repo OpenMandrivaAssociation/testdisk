@@ -4,8 +4,8 @@
 
 Summary:	Tool to check and undelete partition
 Name:		testdisk
-Version:	6.14
-Release:	16
+Version:	7.0
+Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
 Source0:	http://www.cgsecurity.org/%{name}-%{version}.tar.bz2
@@ -192,21 +192,27 @@ popd
 
 %makeinstall_std -C system
 
-rm -r %{buildroot}%{_docdir}/%{name}-%{version}
+rm -r %{buildroot}%{_docdir}/%{name}/
 
 %files
 %doc AUTHORS ChangeLog INFO NEWS README THANKS
 # doc/*.html
 %{_bindir}/testdisk
 %{_mandir}/man8/testdisk*
+%{_mandir}/*/man8/testdisk*
 
 %files -n photorec
 %{_bindir}/photorec
 %{_mandir}/man8/photorec*
+%{_mandir}/man8/qphotorec*
+%{_mandir}/*/man8/*photorec*
+%{_iconsdir}/hicolor/48x48/apps/qphotorec.png
+%{_iconsdir}/hicolor/scalable/apps/qphotorec.svg
 
 %files -n fidentify
 %{_bindir}/fidentify
 %{_mandir}/man8/fidentify*
+/usr/share/man/zh_CN/man8/fidentify.8.xz
 
 %if %{with uclibc}
 %files -n uclibc-%{name}
