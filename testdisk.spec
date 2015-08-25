@@ -1,6 +1,6 @@
 %define ver_progsreiserfs 0.3.1-rc8
 
-%bcond_without	uclibc
+%bcond_with	uclibc
 
 Summary:	Tool to check and undelete partition
 Name:		testdisk
