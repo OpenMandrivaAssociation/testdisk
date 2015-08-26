@@ -48,8 +48,9 @@ filesystems:
     * ReiserFS 3.5, 3.6 and 4
     * Sun Solaris i386 disklabel
     * Unix File System UFS and UFS2 (Sun/BSD/...)
-    * XFS, SGI's Journaled File System 
+    * XFS, SGI's Journaled File System
 
+%if %{with uclibc}
 %package -n	uclibc-%{name}
 Summary:	Tool to check and undelete partition (uClibc build)
 Group:		System/Kernel and hardware
@@ -78,6 +79,7 @@ filesystems:
     * Sun Solaris i386 disklabel
     * Unix File System UFS and UFS2 (Sun/BSD/...)
     * XFS, SGI's Journaled File System 
+%endif
 
 %package -n	photorec
 Summary:	Data recovery software
@@ -93,6 +95,7 @@ PhotoRec ignores the filesystem and goes after the underlying data, so it
 will still work even if your media's filesystem has been severely damaged
 or re-formatted.
 
+%if %{with uclibc}
 %package -n	uclibc-photorec
 Summary:	Data recovery software (uClibc build)
 Group:		System/Kernel and hardware
@@ -106,6 +109,7 @@ pictures (thus, its 'Photo Recovery' name) from digital camera memory.
 PhotoRec ignores the filesystem and goes after the underlying data, so it
 will still work even if your media's filesystem has been severely damaged
 or re-formatted.
+%endif
 
 %package -n	fidentify
 Summary:	Data recovery software
@@ -116,6 +120,7 @@ Requires:	%{name} = %{version}
 Recover lost files from harddisk, digital camera and cdrom fidentify the file
 type, the "extension", by using the same database than PhotoRec.
 
+%if %{with uclibc}
 %package -n	uclibc-fidentify
 Summary:	Data recovery software (uClibc build)
 Group:		System/Kernel and hardware
@@ -124,6 +129,7 @@ Requires:	%{name} = %{version}
 %description -n	uclibc-fidentify
 Recover lost files from harddisk, digital camera and cdrom fidentify the file
 type, the "extension", by using the same database than PhotoRec.
+%endif
 
 %prep
 %setup -q -a 1
