@@ -132,4 +132,3 @@ rm -r %{buildroot}%{_docdir}/%{name}/
 %{_bindir}/fidentify
 %{_mandir}/man8/fidentify*
 %{_mandir}/zh_CN/man8/fidentify.8.*
-
