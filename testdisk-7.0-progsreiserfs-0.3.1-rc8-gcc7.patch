@@ -1,0 +1,31 @@
+--- progsreiserfs-0.3.1-rc8/configure.in.gcc7	2002-12-12 13:32:32.000000000 +0100
++++ progsreiserfs-0.3.1-rc8/configure.in	2017-10-13 11:47:19.462307569 +0200
+@@ -156,7 +156,7 @@
+     CFLAGS="$CFLAGS -g"
+ fi
+ 
+-CFLAGS="$CFLAGS -W -Wall -Wno-unused -Wno-switch -Wno-format"
++CFLAGS="$CFLAGS -W -Wall -Wno-unused -Wno-switch"
+ if test x$enable_Werror = xyes; then
+     CFLAGS="$CFLAGS -Werror"
+ fi
+--- progsreiserfs-0.3.1-rc8/progsreiserfs/libmisc/tools.c.format	2002-12-12 13:32:33.000000000 +0100
++++ progsreiserfs-0.3.1-rc8/progsreiserfs/libmisc/tools.c	2017-10-13 12:11:13.047720101 +0200
+@@ -79,7 +79,7 @@
+     vsprintf(mess, format, args);
+     va_end(args);
+ 	
+-    fprintf(stderr, mess);
++    fprintf(stderr, "%s", mess);
+     fflush(stderr);
+ 	
+     do {
+@@ -92,7 +92,7 @@
+ 	    break;
+ 		
+ 	if (prompts < 2) {
+-	    fprintf(stderr, error);
++	    fprintf(stderr, "%s", error);
+ 	    fflush(stderr);
+ 	}	
+     } while (prompts++ < 2);

@@ -3,19 +3,20 @@
 Summary:	Tool to check and undelete partition
 Name:		testdisk
 Version:	7.0
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		System/Kernel and hardware
+URL:		http://www.cgsecurity.org/wiki/TestDisk
 Source0:	http://www.cgsecurity.org/%{name}-%{version}.tar.bz2
 Source1:	progsreiserfs-%{ver_progsreiserfs}.tar.bz2
 Patch0:		progsreiserfs-journal.patch
 # Upstream patch
-Patch1:		photorec_611_exif_bound_checking_v2.patch
-URL:		http://www.cgsecurity.org/wiki/TestDisk
+Patch1:		progsreiserfs-file-read.patch
+Patch2:		testdisk-7.0-progsreiserfs-0.3.1-rc8-gcc7.patch
 BuildRequires:	pkgconfig(libewf)
 BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	pkgconfig(ext2fs)
-BuildRequires:	pkgconfig(libntfs-3g) 
+BuildRequires:	pkgconfig(libntfs-3g)
 BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	gettext-devel
@@ -71,7 +72,8 @@ type, the "extension", by using the same database than PhotoRec.
 %prep
 %setup -q -a 1
 %patch0
-#%patch1 -p1 -b .exiv2
+%patch1
+%patch2
 %before_configure
 
 libtoolize --force
