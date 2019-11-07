@@ -1,9 +1,15 @@
 %define ver_progsreiserfs 0.3.1-rc8
 
+%ifnarch %{riscv}
+%bcond_without qt5
+%else
+%bcond_with qt5
+%endif
+
 Summary:	Tool to check and undelete partition
 Name:		testdisk
-Version:	7.0
-Release:	5
+Version:	7.1
+Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://www.cgsecurity.org/wiki/TestDisk
@@ -13,6 +19,7 @@ Patch0:		progsreiserfs-journal.patch
 # Upstream patch
 Patch1:		progsreiserfs-file-read.patch
 Patch2:		testdisk-7.0-progsreiserfs-0.3.1-rc8-gcc7.patch
+Patch3:		fix-underquoted-definition.patch
 BuildRequires:	pkgconfig(libewf)
 BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	pkgconfig(ext2fs)
@@ -20,6 +27,7 @@ BuildRequires:	pkgconfig(libntfs-3g)
 BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	gettext-devel
+BuildRequires:  zlib-devel
 
 %description
 Tool to check and undelete partition. Works with the following
@@ -69,24 +77,28 @@ Requires:	%{name} = %{version}
 Recover lost files from harddisk, digital camera and cdrom fidentify the file
 type, the "extension", by using the same database than PhotoRec.
 
+%if %{with qt5}
+%package -n qphotorec
+Summary:        Signature based file carver. Recover lost files
+BuildRequires:  qt5-linguist
+BuildRequires:	qt5-linguist-tools
+BuildRequires:  qt5-qtbase-devel
+
+%description -n qphotorec
+QPhotoRec is a Qt version of PhotoRec. It is a signature based file recovery
+utility. It handles more than 440 file formats including JPG, MSOffice,
+OpenOffice documents.
+%endif
+
 %prep
 %setup -q -a 1
 %patch0
 %patch1
 %patch2
+%patch3 -p1
 %before_configure
 
-libtoolize --force
-aclocal
-automake -a
-autoconf
-
 cd progsreiserfs-%{ver_progsreiserfs}
-libtoolize --force
-touch config.rpath
-aclocal -I m4
-automake -a
-autoconf
 
 %build
 TOP_DIR="$PWD"
@@ -97,7 +109,7 @@ pushd progsreiserfs-%{ver_progsreiserfs}/system
 %configure	--enable-shared=no \
 		--enable-static=yes \
 		--disable-Werror 
-%make
+%make_build
 popd
 
 mkdir -p system
@@ -107,7 +119,7 @@ pushd system
 		--with-reiserfs-includes="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/include/" \
 		--enable-shared=no \
 		--enable-static=yes
-%make
+%make_build
 popd
 
 %install
@@ -116,7 +128,7 @@ popd
 rm -r %{buildroot}%{_docdir}/%{name}/
 
 %files
-%doc AUTHORS ChangeLog INFO NEWS README THANKS
+%doc AUTHORS ChangeLog INFO NEWS THANKS
 # doc/*.html
 %{_bindir}/testdisk
 %{_mandir}/man8/testdisk*
@@ -129,6 +141,16 @@ rm -r %{buildroot}%{_docdir}/%{name}/
 %{_mandir}/*/man8/*photorec*
 %{_iconsdir}/hicolor/48x48/apps/qphotorec.png
 %{_iconsdir}/hicolor/scalable/apps/qphotorec.svg
+
+%if %{with qt5}
+%files -n qphotorec
+%{_bindir}/qphotorec
+%{_mandir}/man8/qphotorec.8*
+%{_mandir}/zh_CN/man8/qphotorec.8*
+%{_datadir}/applications/qphotorec.desktop
+%{_datadir}/icons/hicolor/48x48/apps/qphotorec.png
+%{_datadir}/icons/hicolor/scalable/apps/qphotorec.svg
+%endif
 
 %files -n fidentify
 %{_bindir}/fidentify

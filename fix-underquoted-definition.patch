@@ -1,0 +1,13 @@
+diff --git a/progsreiserfs-0.3.1-rc8/progsreiserfs.m4 b/progsreiserfs-0.3.1-rc8/progsreiserfs.m4
+index ded2a25..7451ffb 100644
+--- a/progsreiserfs-0.3.1-rc8/progsreiserfs.m4
++++ b/progsreiserfs-0.3.1-rc8/progsreiserfs.m4
+@@ -10,7 +10,7 @@ dnl
+ dnl Adds the required libraries to $REISERFS_LIBS and does an
+ dnl AC_SUBST(REISERFS_LIBS)
+ 
+-AC_DEFUN(AC_CHECK_LIBREISERFS,
++AC_DEFUN([AC_CHECK_LIBREISERFS],
+ [
+ 
+ dnl save LIBS
