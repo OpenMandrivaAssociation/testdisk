@@ -137,10 +137,7 @@ rm -r %{buildroot}%{_docdir}/%{name}/
 %files -n photorec
 %{_bindir}/photorec
 %{_mandir}/man8/photorec*
-%{_mandir}/man8/qphotorec*
-%{_mandir}/*/man8/*photorec*
-%{_iconsdir}/hicolor/48x48/apps/qphotorec.png
-%{_iconsdir}/hicolor/scalable/apps/qphotorec.svg
+%{_mandir}/zh_CN/man8/photorec.8*
 
 %if %{with qt5}
 %files -n qphotorec
