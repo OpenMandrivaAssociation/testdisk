@@ -1,4 +1,5 @@
 %define ver_progsreiserfs 0.3.1-rc8
+%define _disable_rebuild_configure 1
 
 %ifnarch %{riscv}
 %bcond_without qt5
@@ -14,12 +15,6 @@ License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		http://www.cgsecurity.org/wiki/TestDisk
 Source0:	http://www.cgsecurity.org/%{name}-%{version}.tar.bz2
-Source1:	progsreiserfs-%{ver_progsreiserfs}.tar.bz2
-Patch0:		progsreiserfs-journal.patch
-# Upstream patch
-Patch1:		progsreiserfs-file-read.patch
-Patch2:		testdisk-7.0-progsreiserfs-0.3.1-rc8-gcc7.patch
-Patch3:		fix-underquoted-definition.patch
 BuildRequires:	pkgconfig(libewf)
 BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	pkgconfig(ext2fs)
@@ -96,32 +91,15 @@ OpenOffice documents.
 %endif
 
 %prep
-%setup -q -a 1
-%patch0
-%patch1
-%patch2
-%patch3 -p1
-%before_configure
-
-cd progsreiserfs-%{ver_progsreiserfs}
+%autosetup -p1
 
 %build
 TOP_DIR="$PWD"
 CONFIGURE_TOP=..
 
-mkdir -p progsreiserfs-%{ver_progsreiserfs}/system
-pushd progsreiserfs-%{ver_progsreiserfs}/system
-%configure	--enable-shared=no \
-		--enable-static=yes \
-		--disable-Werror 
-%make_build
-popd
-
 mkdir -p system
 pushd system
-%configure	--with-dal-lib="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/system/libdal/.libs/" \
-		--with-reiserfs-lib="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/system/libreiserfs/.libs/" \
-		--with-reiserfs-includes="${TOP_DIR}/progsreiserfs-%{ver_progsreiserfs}/include/" \
+%configure	--without-reiserfs \
 		--enable-shared=no \
 		--enable-static=yes
 %make_build
