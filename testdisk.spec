@@ -28,9 +28,11 @@ BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	gettext-devel
 BuildRequires:  zlib-devel
+BuildRequires:	perl
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
+BuildRequires:	m4
 
 %description
 Tool to check and undelete partition. Works with the following
