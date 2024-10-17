@@ -13,7 +13,7 @@ Version:	7.1
 Release:	4
 License:	GPLv2+
 Group:		System/Kernel and hardware
-URL:		http://www.cgsecurity.org/wiki/TestDisk
+URL:		https://www.cgsecurity.org/wiki/TestDisk
 Source0:	http://www.cgsecurity.org/%{name}-%{version}.tar.bz2
 BuildRequires:	pkgconfig(libewf)
 BuildRequires:	pkgconfig(ncursesw)
