@@ -9,8 +9,8 @@
 
 Summary:	Tool to check and undelete partition
 Name:		testdisk
-Version:	7.1
-Release:	4
+Version:	7.2
+Release:	1
 License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		https://www.cgsecurity.org/wiki/TestDisk
