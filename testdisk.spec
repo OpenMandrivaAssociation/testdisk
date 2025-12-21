@@ -15,6 +15,8 @@ License:	GPLv2+
 Group:		System/Kernel and hardware
 URL:		https://www.cgsecurity.org/wiki/TestDisk
 Source0:	http://www.cgsecurity.org/%{name}-%{version}.tar.bz2
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
 BuildRequires:	pkgconfig(libewf)
 BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	pkgconfig(ext2fs)
