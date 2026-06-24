@@ -25,6 +25,7 @@ BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	gettext-devel
 BuildRequires:	qt5-qtbase-devel
+BuildRequires:	qt5-linguist-tools
 BuildRequires:  zlib-devel
 BuildRequires:	perl
 BuildRequires:	autoconf
