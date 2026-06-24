@@ -24,6 +24,7 @@ BuildRequires:	pkgconfig(libntfs-3g)
 BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	gettext-devel
+BuildRequires:	qt5-qtbase-devel
 BuildRequires:  zlib-devel
 BuildRequires:	perl
 BuildRequires:	autoconf
