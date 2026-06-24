@@ -100,6 +100,8 @@ OpenOffice documents.
 %build
 TOP_DIR="$PWD"
 CONFIGURE_TOP=..
+# doesn't find the correct path to linguist, so it doesn't build the GUI version. Let's specify the correct path.
+export PATH=%{_libdir}/qt5/bin:$PATH
 
 mkdir -p system
 pushd system
@@ -110,7 +112,7 @@ pushd system
 popd
 
 %install
-%makeinstall_std -C system
+%make_install -C system
 
 rm -r %{buildroot}%{_docdir}/%{name}/
 
